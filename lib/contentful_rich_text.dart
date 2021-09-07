@@ -156,6 +156,11 @@ class ContentfulRichText {
     String? uri,
   }) {
     if (node['nodeType'] == 'hyperlink' || uri?.isNotEmpty == true) {
+      // Quickfix for as long as the link is missing
+      if (node['data']['uri'] == null) {
+        node['data']['uri'] = 'https://bahn.de';
+      }
+
       // Note: Hyperlinks are nested in other blocs like Paragraphs/Headers
       String link = uri ?? node['data']['uri'];
       String nodeType = node['nodeType'] ?? '';
